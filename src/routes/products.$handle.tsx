@@ -27,7 +27,7 @@ export const Route = createFileRoute("/products/$handle")({
 });
 
 function ProductPage() {
-  const { product } = Route.useLoaderData();
+  const { product } = Route.useLoaderData() as { product: import("@/lib/products").Product };
   const [size, setSize] = useState<string | null>(null);
   const [added, setAdded] = useState(false);
   const { add } = useCart();
