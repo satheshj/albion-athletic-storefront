@@ -9,27 +9,15 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as OrderConfirmedRouteImport } from './routes/order-confirmed'
 import { Route as CollectionRouteImport } from './routes/collection'
-import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as CartRouteImport } from './routes/cart'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProductsHandleRouteImport } from './routes/products.$handle'
 
-const OrderConfirmedRoute = OrderConfirmedRouteImport.update({
-  id: '/order-confirmed',
-  path: '/order-confirmed',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const CollectionRoute = CollectionRouteImport.update({
   id: '/collection',
   path: '/collection',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CheckoutRoute = CheckoutRouteImport.update({
-  id: '/checkout',
-  path: '/checkout',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CartRoute = CartRouteImport.update({
@@ -57,18 +45,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/cart': typeof CartRoute
-  '/checkout': typeof CheckoutRoute
   '/collection': typeof CollectionRoute
-  '/order-confirmed': typeof OrderConfirmedRoute
   '/products/$handle': typeof ProductsHandleRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/cart': typeof CartRoute
-  '/checkout': typeof CheckoutRoute
   '/collection': typeof CollectionRoute
-  '/order-confirmed': typeof OrderConfirmedRoute
   '/products/$handle': typeof ProductsHandleRoute
 }
 export interface FileRoutesById {
@@ -76,38 +60,20 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/cart': typeof CartRoute
-  '/checkout': typeof CheckoutRoute
   '/collection': typeof CollectionRoute
-  '/order-confirmed': typeof OrderConfirmedRoute
   '/products/$handle': typeof ProductsHandleRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | '/'
-    | '/about'
-    | '/cart'
-    | '/checkout'
-    | '/collection'
-    | '/order-confirmed'
-    | '/products/$handle'
+  fullPaths: '/' | '/about' | '/cart' | '/collection' | '/products/$handle'
   fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/'
-    | '/about'
-    | '/cart'
-    | '/checkout'
-    | '/collection'
-    | '/order-confirmed'
-    | '/products/$handle'
+  to: '/' | '/about' | '/cart' | '/collection' | '/products/$handle'
   id:
     | '__root__'
     | '/'
     | '/about'
     | '/cart'
-    | '/checkout'
     | '/collection'
-    | '/order-confirmed'
     | '/products/$handle'
   fileRoutesById: FileRoutesById
 }
@@ -115,33 +81,17 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   CartRoute: typeof CartRoute
-  CheckoutRoute: typeof CheckoutRoute
   CollectionRoute: typeof CollectionRoute
-  OrderConfirmedRoute: typeof OrderConfirmedRoute
   ProductsHandleRoute: typeof ProductsHandleRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/order-confirmed': {
-      id: '/order-confirmed'
-      path: '/order-confirmed'
-      fullPath: '/order-confirmed'
-      preLoaderRoute: typeof OrderConfirmedRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/collection': {
       id: '/collection'
       path: '/collection'
       fullPath: '/collection'
       preLoaderRoute: typeof CollectionRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/checkout': {
-      id: '/checkout'
-      path: '/checkout'
-      fullPath: '/checkout'
-      preLoaderRoute: typeof CheckoutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/cart': {
@@ -179,9 +129,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   CartRoute: CartRoute,
-  CheckoutRoute: CheckoutRoute,
   CollectionRoute: CollectionRoute,
-  OrderConfirmedRoute: OrderConfirmedRoute,
   ProductsHandleRoute: ProductsHandleRoute,
 }
 export const routeTree = rootRouteImport
