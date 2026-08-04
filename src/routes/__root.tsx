@@ -11,10 +11,12 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
-import { CartProvider } from "@/lib/cart";
 import { Header } from "@/components/Header";
 import { CartDrawer } from "@/components/CartDrawer";
 import { Footer } from "@/components/Footer";
+import { Toaster } from "@/components/ui/sonner";
+import { useCartSync } from "@/hooks/useCartSync";
+
 
 function NotFoundComponent() {
   return (
@@ -108,14 +110,23 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   return (
     <QueryClientProvider client={queryClient}>
-      <CartProvider>
-        <Header />
-        <main className="pt-16">
-          <Outlet />
-        </main>
-        <Footer />
-        <CartDrawer />
-      </CartProvider>
+      <AppShell />
     </QueryClientProvider>
   );
 }
+
+function AppShell() {
+  useCartSync();
+  return (
+    <>
+      <Header />
+      <main className="pt-16">
+        <Outlet />
+      </main>
+      <Footer />
+      <CartDrawer />
+      <Toaster position="top-center" />
+    </>
+  );
+}
+
