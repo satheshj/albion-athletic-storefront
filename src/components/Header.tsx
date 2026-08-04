@@ -1,9 +1,10 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { useCart } from "@/lib/cart";
+import { useCartStore } from "@/stores/cartStore";
 
 export function Header() {
-  const { count, openCart } = useCart();
+  const openCart = useCartStore((s) => s.openCart);
+  const count = useCartStore((s) => s.items.reduce((sum, l) => sum + l.quantity, 0));
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -20,7 +21,7 @@ export function Header() {
     >
       <div className="mx-auto flex h-16 max-w-[1600px] items-center justify-between px-6 md:px-10">
         <div className="flex-1 hidden md:flex items-center gap-10 eyebrow text-foreground/80">
-          <Link to="/collection" className="hover:text-foreground transition-colors">Collection 01</Link>
+          <Link to="/collection" className="hover:text-foreground transition-colors">Collection</Link>
           <Link to="/about" className="hover:text-foreground transition-colors">About</Link>
         </div>
         <Link
